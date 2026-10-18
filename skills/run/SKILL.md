@@ -1,5 +1,5 @@
 ---
-name: codex
+name: run
 description: Run a task on Codex (GPT) directly with the codex CLI, with no sandbox and no approvals (`codex exec --yolo`), in the background, and watch its progress from the log file. Use whenever work should go to Codex (code edits, file review, bulk work, anything needing ssh/network/any folder). Replaces the openai codex plugin's codex-rescue agent, which forces a sandbox and shows no progress.
 ---
 
@@ -10,7 +10,7 @@ network to ssh targets, `~/.ssh` unreadable) and its background jobs show no liv
 `codex` CLI itself: `codex exec --yolo` (no sandbox, no approval prompts), output streamed to a log you can read at
 any time.
 
-Scripts live next to this file: `${CLAUDE_PLUGIN_ROOT}/skills/codex/scripts/`. Below, `$S` means that folder.
+Scripts live next to this file: `${CLAUDE_PLUGIN_ROOT}/skills/run/scripts/`. Below, `$S` means that folder.
 
 Defaults: model `gpt-6-luna`, effort `medium` (override per call, or with env `CODEX_MODEL` / `CODEX_EFFORT`).
 Use another model/effort only when the user says so. `gpt-6.1-sol` burns quota fast.
