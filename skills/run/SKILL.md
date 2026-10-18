@@ -17,7 +17,9 @@ Use another model/effort only when the user says so. `gpt-6.1-sol` burns quota f
 
 ## Run it
 1. Write the task into a prompt file in the session scratchpad (never in the project).
-2. Start it with the Bash tool, `run_in_background: true`, one call per parallel job:
+2. Start it with the Bash tool, `run_in_background: true`, one call per parallel job (even a one-line test).
+   A plugin hook denies any `run.sh` / `codex exec` Bash call without `run_in_background: true`: a foreground
+   run blocks the session and never shows in the task panel.
 
 ```bash
 bash "$S/run.sh" <prompt-file> <log-file> [model] [effort] [workdir]

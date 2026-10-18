@@ -6,3 +6,7 @@ Claude Code 플러그인. Codex CLI를 **샌드박스 없이(`codex exec --yolo`
 - 이 스킬은 출력을 로그 파일로 남겨 `status.sh`로 언제든 진행 상황을 본다.
 
 필요: `codex` CLI 로그인 상태. 설치: `/plugin install codex-yolo@duddudcns`
+
+## 백그라운드 강제 (0.3.0)
+
+`hooks/require-background.js`(PreToolUse, Bash)가 `run.sh` 나 `codex exec` 를 `run_in_background: true` 없이 부르면 막는다. 앞단 실행은 세션을 붙잡고 작업 패널에도 안 뜨기 때문이다.
