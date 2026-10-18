@@ -4,5 +4,5 @@
 log="${1:?log file}"; n="${2:-25}"
 [ -f "$log" ] || { echo "no log yet: $log"; exit 1; }
 age=$(( $(date +%s) - $(stat -c %Y "$log") ))
-echo "log=$log bytes=$(stat -c %s "$log") last_write=${age}s ago codex_procs=$(ps -W 2>/dev/null | grep -ci 'codex')"
+echo "log=$log bytes=$(stat -c %s "$log") last_write=${age}s ago codex_procs=$(ps -W 2>/dev/null | grep -ci 'codex.exe')"
 grep -v '^hook:' "$log" | tail -"$n"
