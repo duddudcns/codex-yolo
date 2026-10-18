@@ -1,6 +1,6 @@
 {
   "name": "codex",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Codex CLI를 샌드박스 없이(--yolo) 백그라운드로 직접 실행하는 스킬. 로그 파일로 진행 상황을 바로 볼 수 있다.",
   "author": { "name": "duddudcns" }
 }
