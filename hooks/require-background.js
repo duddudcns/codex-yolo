@@ -6,7 +6,9 @@ process.stdin.on('end', () => {
   try { input = JSON.parse(raw); } catch { return; }
   const ti = input.tool_input || {};
   const cmd = String(ti.command || '');
-  const isCodexJob = /codex-yolo[\/].*run\.sh/.test(cmd) || /\bcodex(\.exe)?\s+exec\b/.test(cmd);
+  // Only an actual invocation counts: `bash <...codex-yolo...>/run.sh` or a `codex exec` command. A grep/cat mentioning them is not a job.
+  const isCodexJob = (/\bbash\s+["']?[^"'\s]*codex-yolo[^"'\s]*run\.sh\b/.test(cmd))
+    || /(^|[;&|(]\s*)codex(\.exe)?\s+exec\b/.test(cmd);
   if (!isCodexJob) return;
   const deny = (reason) => process.stdout.write(JSON.stringify({
     hookSpecificOutput: { hookEventName: 'PreToolUse', permissionDecision: 'deny', permissionDecisionReason: reason },
