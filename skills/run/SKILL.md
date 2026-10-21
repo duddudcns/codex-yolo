@@ -22,6 +22,9 @@ Use another model/effort only when the user says so. `gpt-6.1-sol` burns quota f
    and `run.sh` refuse a job without it. Then `run_in_background: true`, one call per parallel job (even a one-line test).
    A plugin hook denies any `run.sh` / `codex exec` Bash call without `run_in_background: true`: a foreground
    run blocks the session and never shows in the task panel.
+   A second hook denies the job unless this skill (`codex-yolo:run`) was loaded since the last context compaction,
+   and, when the project has `.claude/skills/codex-yolo/SKILL.md`, that project skill too: its lane and safety
+   rules must go into the prompt, and a compaction drops them from context.
 
 ```bash
 codex_job="<short job name>" bash "<scripts folder>/run.sh" <prompt-file> <log-file> [model] [effort] [workdir]
