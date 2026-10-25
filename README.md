@@ -7,6 +7,8 @@ Claude Code 플러그인. Codex CLI를 **샌드박스 없이(`codex exec --yolo`
 
 필요: `codex` CLI 로그인 상태. 설치: `/plugin install codex-yolo@duddudcns`
 
+> **주의:** `--yolo`는 샌드박스와 승인 절차를 모두 끈다. Codex가 파일 삭제·네트워크 접근·임의 명령 실행을 확인 없이 할 수 있으니, 믿을 수 있는 작업과 저장소에서만 쓰고 중요한 변경은 커밋해 둔 뒤 실행할 것.
+
 ## 백그라운드 강제 (0.3.0)
 
 `hooks/require-background.js`(PreToolUse, Bash)가 `run.sh` 나 `codex exec` 를 `run_in_background: true` 없이 부르면 막는다. 앞단 실행은 세션을 붙잡고 작업 패널에도 안 뜨기 때문이다. 또 명령이 `codex_job="<작업 이름>" bash .../run.sh` 로 시작하지 않으면 막는다. 작업 패널은 명령의 앞부분을 작업 이름으로 보여 주기 때문이다(`run.sh` 도 `codex_job` 이 없으면 종료 코드 2).
