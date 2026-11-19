@@ -12,8 +12,9 @@ any time.
 
 Scripts live next to this file: `${CLAUDE_PLUGIN_ROOT}/skills/run/scripts/`. Below, `$S` means that folder.
 
-Defaults: model `gpt-6-luna`, effort `medium` (override per call, or with env `CODEX_MODEL` / `CODEX_EFFORT`).
-Use another model/effort only when the user says so. `gpt-6.1-sol` burns quota fast.
+Defaults (fixed): the **newest sol** model, effort `medium`. `run.sh` picks the highest `gpt-<version>-sol` from
+`~/.codex/models_cache.json` on every run (`latest-sol.js`), so a new sol is used as soon as Codex lists it. Never
+write a version number into a call. Pass a model/effort argument only when the user names one for that job.
 
 ## Run it
 1. Write the task into a prompt file in the session scratchpad (never in the project).
@@ -42,7 +43,7 @@ bash "$S/status.sh" <log-file> [lines]
    `codex` line. Check what Codex actually changed (`git status`, the files it was told to write) before trusting
    its report.
 
-Direct form: `codex exec --yolo --disable hooks -m gpt-6-luna -c 'model_reasoning_effort="medium"' -C <dir> - < prompt.txt > log 2>&1`
+Direct form: `codex exec --yolo --disable hooks -m "$(node "$S/latest-sol.js")" -c 'model_reasoning_effort="medium"' -C <dir> - < prompt.txt > log 2>&1`
 (`-` reads the prompt from stdin, which avoids Windows quoting problems with long prompts).
 
 ## The prompt must carry the safety rules
